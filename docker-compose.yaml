@@ -1,0 +1,19 @@
+services:
+  lagrange-core:
+    image: ghcr.io/lagrangedev/lagrange.onebot:edge
+    restart: always
+    container_name: lagrange-core
+    volumes:
+      - /opt/lagrange:/app/data
+      - /opt/lagrange/upload:/app/upload
+    environment:
+      - TZ=Asia/Shanghai
+
+  lagrange-bot:
+    build:
+      context: .
+    image: lagrange-bot:1.6
+    restart: always
+    container_name : lagrange-bot
+    volumes:
+      - /opt/lagrange/upload:/app/upload
